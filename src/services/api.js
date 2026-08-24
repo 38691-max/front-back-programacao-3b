@@ -116,11 +116,13 @@ export async function cadastrar(nome, email, senha) {
     body: JSON.stringify({ nome, email, senha })
   })
 
-  if (!response.ok) {
-    throw new Error(response.message)
+  const dados = await response.json()
+
+  if (!dados.ok) {
+    throw new Error(dados.message)
   }
 
-  return response;
+  return dados;
 }
 
 // ╔═════════════════════════════════════════════════════════════════════╗
