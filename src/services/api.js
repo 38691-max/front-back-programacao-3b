@@ -110,7 +110,17 @@ export async function login(email, senha) {
 //
 export async function cadastrar(nome, email, senha) {
   // ↓↓↓ APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO ↓↓↓
-  throw new Error("🚧 TAREFA 1 ainda não foi implementada (src/services/api.js)");
+  const response = await fetch(`${API_URL}/api/usuarios/cadastrar`, {
+    method: "POST",
+    headers: "Content-Type: application/json",
+    body: JSON.stringify({ nome, email, senha })
+  })
+
+  if (!response.ok) {
+    throw new Error(response.message)
+  }
+
+  return response;
 }
 
 // ╔═════════════════════════════════════════════════════════════════════╗
