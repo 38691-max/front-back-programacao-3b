@@ -112,7 +112,7 @@ export async function cadastrar(nome, email, senha) {
   // ↓↓↓ APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO ↓↓↓
   const response = await fetch(`${API_URL}/api/usuarios/cadastrar`, {
     method: "POST",
-    headers: "Content-Type: application/json",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ nome, email, senha })
   })
 
