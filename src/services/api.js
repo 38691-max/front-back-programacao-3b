@@ -159,7 +159,6 @@ export async function cadastrar(nome, email, senha) {
 //
 export async function listarUsuarios(token) {
   const response = await fetch(`${API_URL}/api/usuarios`, {
-    method: "GET",
     headers: { Authorization: `Bearer ${token}` }
   })
   
