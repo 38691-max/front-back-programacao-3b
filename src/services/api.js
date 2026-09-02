@@ -116,13 +116,13 @@ export async function cadastrar(nome, email, senha) {
     body: JSON.stringify({ nome, email, senha })
   })
 
-  const dados = await response.json()
+  const data = await response.json()
 
-  if (!dados.ok) {
-    throw new Error(dados.message)
+  if (!data.ok) {
+    throw new Error(data.message)
   }
 
-  return dados;
+  return data;
 }
 
 // ╔═════════════════════════════════════════════════════════════════════╗
@@ -158,8 +158,18 @@ export async function cadastrar(nome, email, senha) {
 //  🧪 Teste o erro: apague uma letra do token antes de mandar e veja o 401.
 //
 export async function listarUsuarios(token) {
-  // ↓↓↓ APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO ↓↓↓
-  throw new Error("🚧 TAREFA 2 ainda não foi implementada (src/services/api.js)");
+  const response = await fetch(`${API_URL}/api/usuarios`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  
+  const data = await response.json()
+
+  if (!data.ok) {
+    throw new Error(data.message)
+  }
+
+  return data
 }
 
 // ╔═════════════════════════════════════════════════════════════════════╗
