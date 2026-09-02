@@ -49,7 +49,7 @@ export async function login(email, senha) {
   // 1) DISPARA o pedido e ESPERA a resposta chegar.
   //    `await` = "segura aqui até voltar". Sem ele você recebe uma
   //    Promise (uma promessa), não os dados.
-  const resposta = await fetch(`${API_URL}/api/usuarios/login`, {
+  const response = await fetch(`${API_URL}/api/usuarios/login`, {
     // 2) O MÉTODO diz a INTENÇÃO do pedido:
     //    GET = ler | POST = criar | PUT = atualizar | DELETE = apagar
     method: "POST",
@@ -67,14 +67,14 @@ export async function login(email, senha) {
 
   // 5) A resposta chegou como texto. Traduzimos de volta para objeto JS.
   //    Repare no segundo `await`: ler o corpo também é assíncrono.
-  const dados = await resposta.json();
+  const data = await response.json();
 
   // 6) ⚠️ ARMADILHA CLÁSSICA: o fetch NÃO dá erro quando o status é 401 ou
   //    404. Para o fetch, "recebi uma resposta" já é sucesso.
   //    Quem avisa se deu certo é `resposta.ok` (true de 200 a 299).
   //    Se você esquecer este if, um login errado passa como se tivesse dado
   //    certo — e o app quebra 3 telas depois, sem você entender por quê.
-  if (!resposta.ok) {
+  if (!response.ok) {
     throw new Error(dados.mensagem || "Não foi possível entrar.");
   }
 
@@ -118,7 +118,7 @@ export async function cadastrar(nome, email, senha) {
 
   const data = await response.json()
 
-  if (!data.ok) {
+  if (!response.ok) {
     throw new Error(data.message)
   }
 
@@ -164,11 +164,11 @@ export async function listarUsuarios(token) {
   
   const data = await response.json()
 
-  if (!data.ok) {
-    throw new Error(data.message)
+  if (!response.ok) {
+    throw new Error(data.message || "Não foi possível carregar a lista")
   }
 
-  return data.usuarios
+  return data.usuarios;
 }
 
 // ╔═════════════════════════════════════════════════════════════════════╗
