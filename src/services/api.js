@@ -168,7 +168,7 @@ export async function listarUsuarios(token) {
     throw new Error(data.message)
   }
 
-  return data
+  return data.usuarios
 }
 
 // ╔═════════════════════════════════════════════════════════════════════╗
