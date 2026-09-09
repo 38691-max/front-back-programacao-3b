@@ -203,8 +203,22 @@ export async function listarUsuarios(token) {
 //     no formulário? (Resposta: o componente pai recarregou a lista.)
 //
 export async function editarPerfil(token, nome, email) {
-  // ↓↓↓ APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO ↓↓↓
-  throw new Error("🚧 TAREFA 3 ainda não foi implementada (src/services/api.js)");
+  const response = await fetch(`${API_URL}/api/usuarios/editar`, {
+    method: "PUT",
+    body: JSON.stringify({nome, email}),
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  })
+
+  const data = await response.json()
+
+  if (!response.ok) {
+    throw new Error(data.message || "Não foi possível editar o perfil")
+  }
+
+  return data
 }
 
 // ╔═════════════════════════════════════════════════════════════════════╗
