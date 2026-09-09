@@ -249,6 +249,16 @@ export async function editarPerfil(token, nome, email) {
 //     social, quase sempre é isso que acontece.
 //
 export async function desativarConta(token) {
-  // ↓↓↓ APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO ↓↓↓
-  throw new Error("🚧 TAREFA 4 ainda não foi implementada (src/services/api.js)");
+  const response = await fetch(`${API_URL}/api/usuarios/desativar`,{
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` }
+  })
+
+  const data = await response.json()
+
+  if (!response.ok) {
+    throw new Error(data.message || "Não foi possível desativar a conta.")
+  }
+
+  return data
 }
